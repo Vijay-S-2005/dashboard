@@ -27,7 +27,7 @@ function MapComponent({ selectedArea, setSelectedArea, fetchData }) {
       }
     };
     fetchAllAreaLocation();
-  }, []); // Empty dependency array ensures this effect runs only once
+  }, []); 
 
   return (
     <div className="map-wrapper">

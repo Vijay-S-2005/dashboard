@@ -9,6 +9,7 @@ function Sidebar({ isOpen, toggleSidebar }) {
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem('session_id');
+    localStorage.removeItem('role');
     navigate('/');
   }
   return (
@@ -18,8 +19,9 @@ function Sidebar({ isOpen, toggleSidebar }) {
       </button>
       <nav>
         <ul>
-          <li><Link to="/home"><button onClick={() => console.log('Home clicked')}>Home</button></Link></li>
           <li><Link to="/dashboard"><button onClick={() => console.log('Dashboard clicked')}>Dashboard</button></Link></li>
+          <li><Link to="/home"><button onClick={() => console.log('Home clicked')}>Profile</button></Link></li>
+          {(localStorage.getItem('role') === 'admin') ?<li><Link to="/user"><button onClick={() => console.log('Create User clicked')}>Manage User</button></Link></li>:null}
           <li><Link to="/about"><button onClick={() => console.log('About clicked')}>About</button></Link></li>
           <li><Link to="/help"><button onClick={() => console.log('Help clicked')}>Help</button></Link></li>
           <li><button onClick={handleLogout}>Sign Out</button></li>

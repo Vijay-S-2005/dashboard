@@ -1,18 +1,16 @@
-// layout.js
-import React , {useState}from 'react';
-import { Outlet } from 'react-router-dom';
-import Heading from './Heading';
+import React,{useState}from 'react';
 import Sidebar from './Sidebar';
-import Login from './Login';
+import Heading from './Heading';
+import { Outlet,Navigate } from 'react-router-dom';
 
-const Layout = () => {
+const AdminRoute = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const toggleSidebar = () => {
       setIsSidebarOpen(!isSidebarOpen);
     };
-
-  return (
-    <div>
+    console.log('AdminRoute')
+    return (
+        <div>
     <button className="menu-btn" onClick={toggleSidebar}>
         ☰
     </button>
@@ -20,13 +18,14 @@ const Layout = () => {
       <header>
         <Heading/>
       </header>
-      <main>
-        {localStorage.getItem('session_id') ? <Outlet/> : <Login/>}
-        
-        
-      </main>
+    {localStorage.getItem('role')==='admin' ? <Outlet /> : <Navigate to="/dashboard" />}
+
     </div>
-  );
+
+    )
+    
 };
 
-export default Layout;
+
+
+export default AdminRoute;

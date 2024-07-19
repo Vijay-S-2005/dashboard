@@ -5,7 +5,7 @@ import axios from 'axios';
 import SearchBar from './SearchBar';
 import FilterOptions from './FilterOptions';
 import HandleData from './HandleData';
-import Register from './Register';
+import Register from './User';
 import Login from './Login';
 function Dashboard() {
   const [selectedArea, setSelectedArea] = useState('');

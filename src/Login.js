@@ -1,20 +1,23 @@
 import React, { useState ,useEffect} from "react";
 import axios from "axios";
 import "./Login.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
+
 export default function Login() {
   const [loginData, setLoginData] = useState({
     userName: "",
     password: ""
   });
 
-  const [message, setMessage] = useState("");
+
   
+  const [message, setMessage] = useState("");
+  // const location=useLocation();
+
   useEffect(() => {
     if (localStorage.getItem("session_id")) {
       navigate("/dashboard");
     }
-
   },[]);
   const navigate = useNavigate();
 
@@ -32,6 +35,7 @@ export default function Login() {
     try {
       const response = await axios.post("http://127.0.0.1:5000/login", loginData);
       localStorage.setItem("session_id", response.data.session);
+      localStorage.setItem("role", response.data.role);
       navigate("/dashboard");
     } catch (error) {
       setMessage("Invalid Username or Password");
