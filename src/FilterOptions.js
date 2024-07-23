@@ -1,7 +1,7 @@
 // FilterOptions.js
 import React, {  useEffect } from 'react';
 
-function FilterOptions({startDate,setStartDate,endDate,setEndDate,granularity,setGranularity,fetchData}) {
+function FilterOptions({startDate,setStartDate,endDate,setEndDate,granularity,setGranularity,fetchData,fetchTotalCountData}) {
 
   useEffect(() => {
     // Ensure end date is greater than start date
@@ -69,7 +69,7 @@ function FilterOptions({startDate,setStartDate,endDate,setEndDate,granularity,se
           1 day
         </label>
       </div>
-      <button className="search-button" onClick={fetchData}>
+      <button className="search-button" onClick={() => { fetchData(); fetchTotalCountData(); }}>
         Search
       </button>
     </div>

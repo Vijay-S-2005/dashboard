@@ -10,13 +10,15 @@
     "chart.js": "^4.4.3",
     "cors": "^2.8.5",
     "leaflet": "^1.9.4",
+    "nodemailer": "^6.9.14",
     "react": "^18.3.1",
     "react-autosuggest": "^10.1.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.3.1",
     "react-leaflet": "^4.2.1",
     "react-router-dom": "^6.25.0",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^5.0.1",
+    "react-slick": "^0.30.2",
     "react-virtualized": "^9.22.5",
     "recharts": "^2.12.7",
     "web-vitals": "^2.1.4"
@@ -44,5 +46,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.6"
   }
 }

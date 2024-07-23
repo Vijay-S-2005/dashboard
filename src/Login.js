@@ -1,9 +1,15 @@
 import React, { useState ,useEffect} from "react";
 import axios from "axios";
 import "./Login.css";
-import { useNavigate,useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+
 
 export default function Login() {
+  const navigate = useNavigate();
+
+
+
   const [loginData, setLoginData] = useState({
     userName: "",
     password: ""
@@ -15,11 +21,11 @@ export default function Login() {
   // const location=useLocation();
 
   useEffect(() => {
-    if (localStorage.getItem("session_id")) {
+    if (localStorage.getItem("user_data")) {
       navigate("/dashboard");
     }
-  },[]);
-  const navigate = useNavigate();
+  }, [navigate]);
+
 
 
   const handleUpdate = (e) => {
@@ -33,9 +39,13 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://127.0.0.1:5000/login", loginData);
-      localStorage.setItem("session_id", response.data.session);
-      localStorage.setItem("role", response.data.role);
+      const responseRecieve = await axios.get(`http://127.0.0.1:5000/get_user_data?user_name=${loginData.userName}`);
+      const responseSend = await axios.post("http://127.0.0.1:5000/login", loginData);
+      console.log("send", responseSend.data);
+      localStorage.setItem("user_data", JSON.stringify(responseRecieve.data));
+      // localStorage.setItem("session_id", responseSend.data.session);
+      // localStorage.setItem("role", responseSend.data.role);
+
       navigate("/dashboard");
     } catch (error) {
       setMessage("Invalid Username or Password");
@@ -45,6 +55,7 @@ export default function Login() {
 
   return (
     <div className="login-container">
+
       <form className="login-form" >
         <h2>Login</h2>
         <label>

@@ -2,10 +2,10 @@
 import React from 'react';
 
 
-function Heading() {
+function Heading({heading}) {
   return (
     <header className="heading">
-      <h1>Chennai Traffic Data Visualization</h1>
+      <h1>{heading}</h1>
     </header>
   );
 }

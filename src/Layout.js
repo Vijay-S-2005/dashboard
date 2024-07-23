@@ -1,27 +1,22 @@
 // layout.js
-import React , {useState}from 'react';
+import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Heading from './Heading';
-import Sidebar from './Sidebar';
 import Login from './Login';
-
+import MenuButtonHandle from './MenuButtonHandle';
 const Layout = () => {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const toggleSidebar = () => {
-      setIsSidebarOpen(!isSidebarOpen);
-    };
+
 
   return (
     <div>
-    <button className="menu-btn" onClick={toggleSidebar}>
-        ☰
-    </button>
-    <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+    <MenuButtonHandle/>
       <header>
-        <Heading/>
+      <Heading heading={"Chennai Traffic Visualization"}/>
+      {localStorage.getItem('user_data') ? <Outlet/> : <Login/>}
+      {/* {localStorage.getItem('session_id') ? <Outlet/> : <Login/>} */}
       </header>
       <main>
-        {localStorage.getItem('session_id') ? <Outlet/> : <Login/>}
+        
         
         
       </main>
