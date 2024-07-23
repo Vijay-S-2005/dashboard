@@ -12,7 +12,7 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
 });
 
-function MapComponent({ selectedArea, setSelectedArea, fetchData }) {
+function MapComponent({ selectedArea, setSelectedArea, fetchData,fetchTotalCountData }) {
   const [locations, setLocations] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState(null);
 
@@ -30,6 +30,7 @@ function MapComponent({ selectedArea, setSelectedArea, fetchData }) {
   }, []); 
 
   return (
+    
     <div className="map-wrapper">
       <MapContainer 
         center={[13.0827, 80.2707]} 
@@ -50,7 +51,8 @@ function MapComponent({ selectedArea, setSelectedArea, fetchData }) {
               click: () => {
                 setSelectedLocation([location.latitiude, location.Longitude]);
                 setSelectedArea(location.area);
-                fetchData(location.area); // Pass location.area directly
+                fetchData(location.area);
+                fetchTotalCountData(location.area) // Pass location.area directly
               },
             }}
           >

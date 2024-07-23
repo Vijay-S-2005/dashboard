@@ -1,24 +1,23 @@
-import React,{useState}from 'react';
-import Sidebar from './Sidebar';
+import React from 'react';
+
 import Heading from './Heading';
 import { Outlet,Navigate } from 'react-router-dom';
+import MenuButtonHandle from './MenuButtonHandle';
+
 
 const AdminRoute = () => {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const toggleSidebar = () => {
-      setIsSidebarOpen(!isSidebarOpen);
-    };
+    const user_data = JSON.parse(localStorage.getItem('user_data'));
+    
+
     console.log('AdminRoute')
     return (
         <div>
-    <button className="menu-btn" onClick={toggleSidebar}>
-        ☰
-    </button>
-    <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+
+    <MenuButtonHandle/>
       <header>
-        <Heading/>
+        <Heading heading={"Chennai Traffic Visualization"}/>
       </header>
-    {localStorage.getItem('role')==='admin' ? <Outlet /> : <Navigate to="/dashboard" />}
+    {user_data.role ? <Outlet /> : <Navigate to="/dashboard" />}
 
     </div>
 

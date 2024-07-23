@@ -2,7 +2,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./Layout";
-import Home from "./Home";
+import Home from "./ChangePassword";
 import About from "./About";
 import Help from "./Help";
 import Dashboard from "./Dashboard";
@@ -11,9 +11,10 @@ import "./App.css";
 import { Navigate } from "react-router-dom";
 import User from "./User";
 import AdminRoute from "./AdminRoute";
+import LoginRouter from "./LoginRouter";
 
-// import Heading from './Heading';
-// import Contact from './Contact';
+
+
 
 const App = () => {
   return (
@@ -21,7 +22,7 @@ const App = () => {
       <div>
         <Routes>
 
-          <Route element={<Layout />}>
+          <Route element={<LoginRouter />}>
             <Route path="/" element={<Login />} />
           </Route>
 
@@ -36,7 +37,7 @@ const App = () => {
             <Route path="/user" element={<User/>} />
           </Route>
 
-        
+
 
           <Route path="*" element={<Navigate to="/" />} />
 
