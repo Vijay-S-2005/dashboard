@@ -26,7 +26,9 @@ export default function Login() {
     }
   }, [navigate]);
 
-
+ const handlePassword =()=>{
+    navigate("/forgotpassword");
+ }
 
   const handleUpdate = (e) => {
     const { name, value } = e.target;
@@ -76,6 +78,7 @@ export default function Login() {
             onChange={handleUpdate}
           />
         </label>
+        <button type="submit" onClick={handlePassword}>forgot password</button>
         <button type="submit" onClick={handleSubmit}>Login</button>
       </form>
       {message && <p>{message}</p>}

@@ -12,29 +12,36 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
 });
 
-function MapComponent({ selectedArea, setSelectedArea, fetchData,fetchTotalCountData }) {
+function MapComponent({ selectedArea, setSelectedArea, fetchData, fetchTotalCountData }) {
   const [locations, setLocations] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState(null);
+  const [mapWrapperClass, setMapWrapperClass] = useState('map-wrapper');
 
   useEffect(() => {
     const fetchAllAreaLocation = async () => {
       try {
         const response = await axios.get("http://127.0.0.1:5000/allAreasWithLocation");
         setLocations(response.data);
-        // console.log("location", response.data);
       } catch (error) {
         console.error("error occurred during the fetching location", error);
       }
     };
     fetchAllAreaLocation();
-  }, []); 
+  }, []);
+
+  const handleMarkerClick = (location) => {
+    setSelectedLocation([location.latitiude, location.Longitude]);
+    setSelectedArea(location.area);
+    fetchData(location.area);
+    fetchTotalCountData(location.area);
+    setMapWrapperClass('map-wrapper-alt'); // Change class name on click
+  };
 
   return (
-    
-    <div className="map-wrapper">
-      <MapContainer 
-        center={[13.0827, 80.2707]} 
-        zoom={13} 
+    <div className={mapWrapperClass}>
+      <MapContainer
+        center={[13.0827, 80.2707]}
+        zoom={13}
         className="map-container"
         zoomControl={false}
       >
@@ -44,16 +51,11 @@ function MapComponent({ selectedArea, setSelectedArea, fetchData,fetchTotalCount
         />
 
         {locations.map((location, index) => (
-          <Marker 
+          <Marker
             key={index}
             position={[location.latitiude, location.Longitude]}
             eventHandlers={{
-              click: () => {
-                setSelectedLocation([location.latitiude, location.Longitude]);
-                setSelectedArea(location.area);
-                fetchData(location.area);
-                fetchTotalCountData(location.area) // Pass location.area directly
-              },
+              click: () => handleMarkerClick(location),
             }}
           >
             <Popup>
@@ -64,7 +66,6 @@ function MapComponent({ selectedArea, setSelectedArea, fetchData,fetchTotalCount
 
         <UpdateMapView selectedLocation={selectedLocation} />
       </MapContainer>
-      {/* {console.log("locationsss", locations)} */}
     </div>
   );
 }

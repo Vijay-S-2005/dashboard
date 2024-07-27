@@ -52,7 +52,7 @@ const ChartComponent = ({  dataLive = [] }) => {
     labels: ['motorbike', 'car', 'bus', 'LCV', 'truck', 'auto'],
     datasets: [
       {
-        label: 'Monthly Sales',
+        label: 'Total vechiles',
         data: [total.motorbike, total.car, total.bus, total.lcv, total.truck, total.auto],
         backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF99FF'],
         borderColor: 'rgba(75,192,192,1)',
@@ -74,14 +74,18 @@ const ChartComponent = ({  dataLive = [] }) => {
 
 
   const chartStyle = {
-    height: '250px', // fixed height for charts
+    height: '250px',
+        
   };
 
 return (
     
     <>
         {dataLive.length > 0 ? 
+                <>
+                <h2 id="lineChartHistoryTitle" class="text-center">PIE CHART</h2>
                 <div style={chartStyle}><Pie data={dataPie} options={optionsPie} /></div> 
+                </>
                 : null
         }
     </>

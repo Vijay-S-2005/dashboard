@@ -88,6 +88,9 @@ const ScrollableLineChart = ({ type, data = [] ,liveData}) => {
 
   return (
     <>
+          {data.length>0&&liveData?<><h2 id="lineChartHistoryTitle" class="text-center">LINE CHART</h2></>:null}
+          {data.length>0&&!liveData?<><h2 id="lineChartHistoryTitle" class="text-center">YESTERDAY vs TODAY</h2></>:null}
+
       {data.length > 0 && (
         <div onWheel={handleScroll} style={{ overflowX: 'auto', whiteSpace: 'nowrap', width: '100%', height: '300px' }}>
           <Line

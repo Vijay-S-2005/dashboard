@@ -12,9 +12,7 @@ import { Navigate } from "react-router-dom";
 import User from "./User";
 import AdminRoute from "./AdminRoute";
 import LoginRouter from "./LoginRouter";
-
-
-
+import ForgotPassword from "./ForgotPassword";
 
 const App = () => {
   return (
@@ -24,6 +22,7 @@ const App = () => {
 
           <Route element={<LoginRouter />}>
             <Route path="/" element={<Login />} />
+            <Route path="forgotPassword" element={<ForgotPassword />} />
           </Route>
 
           <Route element={<Layout />}>

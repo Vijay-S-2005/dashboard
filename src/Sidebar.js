@@ -6,14 +6,14 @@ import { Link } from 'react-router-dom';
 
 
 function Sidebar({ isOpen, toggleSidebar }) {
-  const user_data = JSON.parse(localStorage.getItem('user_data'));
+  let user_data = JSON.parse(localStorage.getItem('user_data'));
   const navigate = useNavigate();
+  
   const handleLogout = () => {
     localStorage.removeItem('user_data');
-    // localStorage.removeItem('session_id');
-    // localStorage.removeItem('role');
     navigate('/');
   }
+  
   return (
     <div className={`sidebar ${isOpen ? 'open' : ''}`}>
       <button className="close-btn" onClick={toggleSidebar}>
@@ -21,11 +21,11 @@ function Sidebar({ isOpen, toggleSidebar }) {
       </button>
       <nav>
         <ul>
-          <li><Link to="/dashboard"><button onClick={() => console.log('Dashboard clicked')}>Dashboard</button></Link></li>
-          <li><Link to="/home"><button onClick={() => console.log('Home clicked')}>Change Password</button></Link></li>
-          {(user_data.role === 'admin') ?<li><Link to="/user"><button onClick={() => console.log('Create User clicked')}>Manage User</button></Link></li>:null}
-          <li><Link to="/about"><button onClick={() => console.log('About clicked')}>About</button></Link></li>
-          <li><Link to="/help"><button onClick={() => console.log('Help clicked')}>Help</button></Link></li>
+          <li><Link to="/dashboard"><button >Dashboard</button></Link></li>
+          <li><Link to="/home"><button>Change Password</button></Link></li>
+          {(user_data?.role === 'admin') ?<li><Link to="/user"><button>Manage User</button></Link></li>:null}
+          <li><Link to="/about"><button >About</button></Link></li>
+          <li><Link to="/help"><button>Help</button></Link></li>
           <li><button onClick={handleLogout}>Sign Out</button></li>
         </ul>
       </nav>
