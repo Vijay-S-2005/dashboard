@@ -5,6 +5,7 @@ import axios from 'axios';
 import SearchBar from './SearchBar';
 import FilterOptions from './FilterOptions';
 import ChartComponent from './PieChartComponent';
+import { useNavigate } from 'react-router-dom';
 import LineChartComponent from './LineChartLiveComponent';
 
 
@@ -16,6 +17,20 @@ function Dashboard() {
   const [dataLive, setDataLive] = useState([]);
   const [mapWrapperClass, setMapWrapperClass] = useState('map-wrapper');
   const [totalCountData, setTotalCountData] = useState([]);
+  const navigate = useNavigate();
+
+  let user_data = JSON.parse(localStorage.getItem('user_data'));
+  console.log('changed',user_data.isChangedPassword)
+  
+const changePassword =()=>{
+    if(user_data.isChangedPassword===false){
+    console.log('changed',user_data.isChangedPassword)
+    navigate('/home');
+  }
+
+}
+
+
 
   const fetchData = async (location) => {
     try {

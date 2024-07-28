@@ -2,14 +2,25 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import './ForgotPassword.css';
 
 export default function ForgotPassword() {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const validate = () => {
+        let errors = true;
+        if (!username) {
+            errors=false;
+            toast.error("Username is required", { position: "top-right" });
+        }
+        if (!email) {
+            errors=false;
+            toast.error("Email is required", { position: "top-right" });
+        }
+        return errors
+    }
+
+    const forgotPassword = async () => {
         try {
             const response = await axios.put('http://127.0.0.1:5000/forgot_password', { username, email });
             console.log(response.data);
@@ -18,6 +29,17 @@ export default function ForgotPassword() {
             console.log("Error occurred during login:", error);
             toast.error("username or email invalid", { position: "top-right" });
         }
+    }
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if(validate()){
+            forgotPassword();
+        }
+        else{ 
+            console.log("error")
+    }
     }
 
     return (
