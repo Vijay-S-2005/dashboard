@@ -9,7 +9,7 @@ const Layout = () => {
 
   return (
     <div>
-    <MenuButtonHandle/>
+    {localStorage.getItem('user_data')&&<MenuButtonHandle/>}
       <header>
       <Heading heading={"Chennai Traffic Visualization"}/>
       {localStorage.getItem('user_data') ? <Outlet/> : <Login/>}

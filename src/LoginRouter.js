@@ -9,7 +9,9 @@ export default function LoginRouter() {
         <div>
         <Heading heading={"Chennai Traffic Visualization"}/>
 
-      {localStorage.getItem('user_data') ? <Outlet/> : <Login/>}
+       <Outlet/> 
+      {console.log(localStorage.getItem('user_data'))
+      }
         {/* {localStorage.getItem('session_id') ? <Outlet/> : <Login/>} */}
         </div>
     );

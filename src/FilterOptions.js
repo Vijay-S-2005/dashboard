@@ -1,9 +1,11 @@
 // FilterOptions.js
 import React, {  useEffect } from 'react';
 
+
 function FilterOptions({startDate,setStartDate,endDate,setEndDate,granularity,setGranularity,fetchData,fetchTotalCountData}) {
 
   useEffect(() => {
+
     // Ensure end date is greater than start date
     if (endDate && startDate > endDate) {
       setEndDate('');
